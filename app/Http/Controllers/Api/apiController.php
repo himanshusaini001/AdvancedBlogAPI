@@ -124,5 +124,7 @@ class apiController extends Controller
             
             return response()->json(['message' => 'Logged out successfully from all devices'], 200);
      }
+
+     // User Role 
      
 }

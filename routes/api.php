@@ -17,15 +17,12 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth:sanctum']], function ()
     Route::get("/profile",[apiController::class,"profile"]);   
 
      // Logout
-     Route::delete("/logout",[apiController::class,"logout"]);   
+     Route::delete("/logout",[apiController::class,"logout"]);
+
+     // Start Role
+
+     // Post Role
+     Route::post("/role",[apiController::class,"role"]);  
 });
 
 
-Route::group(['prefix' => 'user', 'middleware' => ['auth:sanctum']], function () {
-
-    // profile
-    Route::get("/profile",[apiController::class,"profile"]);   
-
-     // Logout
-     Route::delete("/logout",[apiController::class,"logout"]);   
-});
