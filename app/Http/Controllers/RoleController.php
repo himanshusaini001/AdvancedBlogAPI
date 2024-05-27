@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Models\user_role;
+use App\Models\User;
 
 class RoleController extends Controller
 {
@@ -15,8 +16,8 @@ class RoleController extends Controller
     try{
         // Add Validation Multiap type
         $validation = Validator::make($request->all(), [
-         'role_type' => 'required',
-     ]);
+            'role_type' => 'required',
+        ]);
 
      // Validation All Data
      if ($validation->fails()) {
@@ -50,7 +51,7 @@ class RoleController extends Controller
    }
 
     // get Single  Role
-    public function indexRole(){
+    public function index(){
         $indexRole = user_role::all();
        
         if($indexRole)
@@ -69,5 +70,42 @@ class RoleController extends Controller
         }
         
     }
+    // get Single Role
+    public function assignRole(Request $request, User $user) {
+        // Extract user_id from the request
+        $user_id = $request->userid;
+        $index_id = $request->index_role_id;
+        // Validation rules
+        $rules = [
+            'userid' => 'required|integer|exists:users,id',
+        ];
+    
+        // Validate the request data
+        $validator = Validator::make($request->all(), $rules);
+    
+        // Check for validation errors
+        if ($validator->fails()) {
+            // Handle the errors, you can return them or perform any other action
+            return response()->json(['errors' => $validator->errors()], 400);
+        }
+    
+        if($validator)
+        {
+            User::where('id', $user_id)->update(['role_id' => $index_id]);
+        }
+        // Assign the role to the user
+        // Implement your logic here to assign the role
+    
+        // Return success response
+        return response()->json(['message' => 'Role assigned successfully'], 200);
+    }
+    
 
+
+      
+     
+      
+
+    
+    
 }
