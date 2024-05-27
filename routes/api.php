@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\apiController;
+use App\Http\Controllers\RoleController;
 
 // Register
 Route::post("/user/register",[apiController::class,"register"]);
@@ -18,11 +19,14 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth:sanctum']], function ()
 
      // Logout
      Route::delete("/logout",[apiController::class,"logout"]);
-
-     // Start Role
-
-     // Post Role
-     Route::post("/role",[apiController::class,"role"]);  
 });
+
+// Start Role
+
+    // Post Role
+    Route::post("/createrole",[RoleController::class,"createrole"]);
+
+    // All Auther in Role
+    Route::get("/indexRole",[RoleController::class,"indexRole"]);
 
 
