@@ -1,0 +1,11 @@
+[
+    {
+        "role_type" : "Admin"
+    },
+    {
+        "role_type" : "Author"
+    },
+    {
+        "role_type" : "Reader"
+    }
+]

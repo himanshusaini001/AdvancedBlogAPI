@@ -10,8 +10,12 @@ use Illuminate\Notifications\Notifiable;
 class user_role extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
-
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
     protected $fillable = [
-        'role_id',
+        'role_type',
     ];
 }
