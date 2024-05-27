@@ -15,12 +15,24 @@ Route::post("/user/login",[apiController::class,"login"]);
 Route::group(['prefix' => 'user', 'middleware' => ['auth:sanctum']], function () {
 
     // profile
-    Route::get("/profile",[apiController::class,"profile"]);   
+        Route::get("/profile",[apiController::class,"profile"]);   
+    // Logout
+        Route::delete("/logout",[apiController::class,"logout"]);
 
-     // Logout
-     Route::delete("/logout",[apiController::class,"logout"]);
+    // Post Route
+        
+        // store Post
+            Route::post("/store",[apiController::class,"store"]);
+        // Create All post
+          Route::get("/createPost",[apiController::class,"createPost"]);
+        // show Get
+            Route::get("/show",[apiController::class,"show"]);
+        // update put
+            Route::put("/update",[apiController::class,"update"]);
+        // destroy Delete
+            Route::delete("/destroy",[apiController::class,"destroy"]);
 
-     
+
 });
 
 // Role Route 

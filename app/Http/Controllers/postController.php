@@ -11,5 +11,25 @@ use Illuminate\Support\Facades\Validator;
 
 class postController extends Controller
 {
-    
+    // Create Post
+    public function createPost(){
+
+    }
+    // Store Post
+    public function store(){
+
+    }
+     // Show Post
+    public function show(){
+
+    }
+     // update Post
+    public function update(){
+
+    }
+     // destroy Post
+    public function destroy(){
+
+    }
+
 }
