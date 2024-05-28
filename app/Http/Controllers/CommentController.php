@@ -14,28 +14,18 @@ class CommentController extends Controller
     // All Data show
     public function index($post_id){
         try{
-            try{
-                $count = comment::where('post_id',$post_id)->count();
-                if($count > 0 )
-                {
-                    $show = comment::where('post_id',$post_id)->get();
-                    return response()->json([
-                        'status' => true,
-                        'message' => 'Successfull Get Data With Id',
-                        'Data' => $show,
-                    ]);
-                }
-               
-            }catch(\Exception $e){
+            $count = comment::where('post_id',$post_id)->count();
+            if($count > 0 )
+            {
+                $show = comment::where('post_id',$post_id)->get();
                 return response()->json([
-                    'status' => false,
-                    'message' => 'An error occurred Post',
-                    'error' => $e->getMessage(),
+                    'status' => true,
+                    'message' => 'Successfull Get Data With Id',
+                    'Data' => $show,
                 ]);
             }
-        }
-        catch(\Exception $e)
-        {
+            
+        }catch(\Exception $e){
             return response()->json([
                 'status' => false,
                 'message' => 'An error occurred Post',
@@ -116,32 +106,41 @@ class CommentController extends Controller
     //update Data in comment
     public function update(Request $request, Post $post, comment $comment)
     {
-        $post_id= $request->post_id;
-        $comment_id= $request->comment_id;
-        $validate_request= $request->validate([
-            'comment' => 'required|string|max:255',
-            'comment_id' => 'required|integer|exists:comments,id',
-            'post_id' => 'required|integer|exists:comments,post_id',
-        ]);
-
-        if($validate_request)
-        {
-            $count = Comment::where('post_id', $post_id)->where('id', $comment_id)->count();
-            if($count > 0)
+        try{
+            $post_id= $request->post_id;
+            $comment_id= $request->comment_id;
+            $validate_request= $request->validate([
+                'comment' => 'required|string|max:255',
+                'comment_id' => 'required|integer|exists:comments,id',
+                'post_id' => 'required|integer|exists:comments,post_id',
+            ]);
+    
+            if($validate_request)
             {
-            $comment = Comment::where('post_id', $post_id) ->where('id', $comment_id)->update(['comment' => $request->comment]);           
-                return response()->json([
-                'status' => true,
-                'message' => 'update successfuly',
-                ],200);
+                $count = Comment::where('post_id', $post_id)->where('id', $comment_id)->count();
+                if($count > 0)
+                {
+                $comment = Comment::where('post_id', $post_id) ->where('id', $comment_id)->update(['comment' => $request->comment]);           
+                    return response()->json([
+                    'status' => true,
+                    'message' => 'update successfuly',
+                    ],200);
+                }
+                else{
+                    return response()->json([
+                    'status' => false,
+                    'message' => 'invalid user',
+                    'data' => []
+                    ],200);
+                }
             }
-            else{
-                return response()->json([
+        }catch(\Exception $e)
+        {
+            return response()->json([
                 'status' => false,
-                'message' => 'invalid user',
-                'data' => []
-                ],200);
-            }
+                'message' => 'An error occurred Post',
+                'error' => $e->getMessage(),
+            ]);
         }
     } 
     //destroy Data in comment

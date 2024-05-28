@@ -104,25 +104,43 @@ class apiController extends Controller
 
     public function profile()
     {
-       $user = auth()->user();
-       return response()->json([
-        'status'=>true,
-        'message'=>'Successfull Fetch data in Profile',
-        'data'=>$user
-       ]);
-
+       try{
+        $user = auth()->user();
+        return response()->json([
+         'status'=>true,
+         'message'=>'Successfull Fetch data in Profile',
+         'data'=>$user
+        ]);
+ 
+       }catch(\Exception $e)
+       {
+           return response()->json([
+               'status' => false,
+               'message' => 'An error occurred Post',
+               'error' => $e->getMessage(),
+           ]);
+       }
     }
 
      // User Logout
      public function logout(Request $request)
      {
-          // Get the authenticated user
+        try{
+            // Get the authenticated user
             $user = $request->user();
-            
+                        
             // Revoke all tokens for the user
             $user->tokens()->delete();
-            
+
             return response()->json(['message' => 'Logged out successfully from all devices'], 200);
+        }catch(\Exception $e)
+        {
+            return response()->json([
+                'status' => false,
+                'message' => 'An error occurred Post',
+                'error' => $e->getMessage(),
+            ]);
+        }
      }
 
      // User Role 

@@ -14,7 +14,6 @@ class postController extends Controller
 {
      // Store Post
     public function store(Request $request){
-      
         try{
 
             $user_id = $request->user_id;
