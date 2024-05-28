@@ -71,7 +71,6 @@ class apiController extends Controller
             
         ]);
 
-
         //Response Data in Json
         return response()->json([
             'status' => true,
@@ -89,7 +88,6 @@ class apiController extends Controller
     }
 
     // User Login
-
  /**
      * @OA\post(
      *     path="/user/login",
