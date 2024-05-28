@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\apiController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\postController;
+use App\Http\Controllers\CommentController;
 // Register
 Route::post("/user/register",[apiController::class,"register"]);
 
@@ -25,14 +26,25 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth:sanctum']], function ()
             Route::post("/store",[postController::class,"store"]);
         // Create All post
           Route::get("/index",[postController::class,"index"]);
-        // show Get
+        // show Psot
           Route::get("/show/{id}", [postController::class,"show"]);
-        // update put
+        // update Post
             Route::put("/update",[postController::class,"update"]);
-        // destroy Delete
+        // destroy Post
             Route::delete("/destroy/{id}",[postController::class,"destroy"]);
 
+        // Comment Route
   
+        // store Comment
+             Route::post("/comment/store",[CommentController::class,"store"]);
+        // Create All post
+            Route::get("/comment/index/{post_id}",[CommentController::class,"index"]);
+        // show Get
+            Route::get("/comment/show/{comment_id}/{post_id}", [CommentController::class,"show"]);
+        // update put
+            Route::put("/comment/update",[CommentController::class,"update"]);
+        // destroy Comment
+            Route::delete("/comment/destroy/{id}",[CommentController::class,"destroy"]);
 
 
 });
