@@ -114,19 +114,36 @@ class CommentController extends Controller
     }
 
     //update Data in comment
-    public function update(Request $request, Post $post, Comment $comment){
-        try{
-         
-        }
-        catch(\Exception $e)
+    public function update(Request $request, Post $post, comment $comment)
+    {
+        $post_id= $request->post_id;
+        $comment_id= $request->comment_id;
+        $validate_request= $request->validate([
+            'comment' => 'required|string|max:255',
+            'comment_id' => 'required|integer|exists:comments,id',
+            'post_id' => 'required|integer|exists:comments,post_id',
+        ]);
+
+        if($validate_request)
         {
-            return response()->json([
+            $count = Comment::where('post_id', $post_id)->where('id', $comment_id)->count();
+            if($count > 0)
+            {
+            $comment = Comment::where('post_id', $post_id) ->where('id', $comment_id)->update(['comment' => $request->comment]);           
+                return response()->json([
+                'status' => true,
+                'message' => 'update successfuly',
+                ],200);
+            }
+            else{
+                return response()->json([
                 'status' => false,
-                'message' => 'An error occurred Post',
-                'error' => $e->getMessage(),
-            ]);
+                'message' => 'invalid user',
+                'data' => []
+                ],200);
+            }
         }
-    }
+    } 
     //destroy Data in comment
     public function destroy(){
         try{
