@@ -144,12 +144,24 @@ class CommentController extends Controller
         }
     } 
     //destroy Data in comment
-    public function destroy(){
-        try{
-
+    public function destroy($id,Post $post, Comment $comment          ){
+        try
+        {
+            // Find the post by ID or fail if not found
+            $postToDelete = $comment->findOrFail($id);
+                    
+            // Delete the post
+            if( $postToDelete->delete())
+            {
+                // You might want to return a response or redirect after deletion
+                return response()->json(['message' => 'Post deleted successfully.'], 200);
+            }else{
+                echo 'not';die;
+            }
+       
         }
         catch(\Exception $e)
-        {
+        { 
             return response()->json([
                 'status' => false,
                 'message' => 'An error occurred Post',
@@ -157,6 +169,5 @@ class CommentController extends Controller
             ]);
         }
     }
-
     
 }
