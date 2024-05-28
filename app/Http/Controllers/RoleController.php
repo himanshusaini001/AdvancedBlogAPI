@@ -50,7 +50,7 @@ class RoleController extends Controller
      }
    }
 
-    // get Single  Role
+    // get All  Roles Data
     public function index(){
         $indexRole = user_role::all();
        

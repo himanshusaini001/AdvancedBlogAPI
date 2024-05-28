@@ -22,15 +22,17 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth:sanctum']], function ()
     // Post Route
         
         // store Post
-            Route::post("/store",[apiController::class,"store"]);
+            Route::post("/store",[postController::class,"store"]);
         // Create All post
-          Route::get("/createPost",[apiController::class,"createPost"]);
+          Route::get("/index",[postController::class,"index"]);
         // show Get
-            Route::get("/show",[apiController::class,"show"]);
+          Route::get("/show/{id}", [postController::class,"show"]);
         // update put
-            Route::put("/update",[apiController::class,"update"]);
+            Route::put("/update",[postController::class,"update"]);
         // destroy Delete
-            Route::delete("/destroy",[apiController::class,"destroy"]);
+            Route::delete("/destroy/{id}",[postController::class,"destroy"]);
+
+  
 
 
 });
