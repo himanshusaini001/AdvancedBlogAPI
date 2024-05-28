@@ -11,5 +11,17 @@ use Illuminate\Support\Facades\Validator;
 
 class CommentController extends Controller
 {
-    //
+    public function index(){
+        try{
+
+        }
+        catch(\Exception $e)
+        {
+            return response()->json([
+                'status' => false,
+                'message' => 'An error occurred Post',
+                'error' => $e->getMessage(),
+            ]);
+        }
+    }
 }
