@@ -136,10 +136,25 @@
             "sanctum": {
                 "type": "http",
                 "scheme": "bearer",
-                "bearerFormat": "sanctum",
+                "bearerFormat": "anctum",
                 "description": "Enter token in format (Bearer <token>)",
                 "name": "Authorization",
-                "in": "header"
+                "in": "header",
+                "security": {
+                    "api_key": {
+                        "type": "apiKey",
+                        "description": "API key for authentication",
+                        "name": "api_key",
+                        "in": "query"
+                    },
+                    "another_param": {
+                        "type": "http",
+                        "scheme": "basic",
+                        "description": "Another parameter for authentication",
+                        "name": "Another-Param",
+                        "in": "header"
+                    }
+                }
             }
         }
     }

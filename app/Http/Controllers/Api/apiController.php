@@ -132,7 +132,7 @@ class apiController extends Controller
             return response()->json([
                 'status' => true,
                 'message' => 'User login is successfully',
-                'token' => $user->createToken('Api Token')->plainTextToken,
+                'token' => $user->createToken('AuthToken')->plainTextToken,
             ], 200);
 
         }catch(\Exception $e)

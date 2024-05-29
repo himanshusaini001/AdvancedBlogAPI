@@ -192,15 +192,29 @@ return [
                     ],
                 ],
                 */
-                'sanctum' => [ // Unique name of security
-                    'type' => 'http', // The correct type for bearer token authentication is "http".
-                    'scheme' => 'bearer', // Specify the type of authentication scheme.
-                    'bearerFormat' => 'sanctum', // Optional: Adding bearerFormat to specify the format of the bearer token.
+                'sanctum' => [
+                    'type' => 'http',
+                    'scheme' => 'bearer',
+                    'bearerFormat' => 'anctum',
                     'description' => 'Enter token in format (Bearer <token>)',
-                    'name' => 'Authorization', // The name of the header or query parameter to be used.
-                    'in' => 'header', // The location of the API key. Valid values are "query" or "header".
+                    'name' => 'Authorization',
+                    'in' => 'header',
+                    'security' => [
+                        'api_key' => [
+                            'type' => 'apiKey',
+                            'description' => 'API key for authentication',
+                            'name' => 'api_key',
+                            'in' => 'query',
+                        ],
+                        'another_param' => [
+                            'type' => 'http',
+                            'scheme' => 'basic',
+                            'description' => 'Another parameter for authentication',
+                            'name' => 'Another-Param',
+                            'in' => 'header',
+                        ],
+                    ],
                 ],
-                
             ],
             'security' => [
                 /*
