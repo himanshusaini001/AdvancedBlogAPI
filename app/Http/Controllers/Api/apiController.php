@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Validator;
    /**
      * @OA\Info(
      *     title="Laravel API",
-     *     version="1.0.2",
+     *     version="1.0.0",
      *     description="API documentation for the Laravel project"
      * )
      *
@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Validator;
      *     description="API v1"
      * )
      */
+
 class apiController extends Controller
 {
 
@@ -149,76 +150,25 @@ class apiController extends Controller
 /**
  * @OA\Get(
  *     path="/user/profile",
- *     summary="Your endpoint summary",
- *     description="Your endpoint description",
- *     operationId="yourOperationId",
  *     tags={"User"},
- *     @OA\Parameter(
- *         name="X-CSRF-TOKEN",
- *         in="header",
- *         required=true,
- *         description="Bearer token",
- *         @OA\Schema(
- *             type="string",
- *             example="Bearer"
- *         )
- *     ),
- *     @OA\Parameter(
- *         name="Authorization",
- *         in="header",
- *         required=true,
- *         description="Access token",
- *         @OA\Schema(
- *             type="string",
- *             example="Bearer {access_token}"
- *         )
- *     ),
- *     @OA\Parameter(
- *         name="Content-Type",
- *         in="header",
- *         required=true,
- *         description="Content type",
- *         @OA\Schema(
- *             type="string",
- *             example="application/json"
- *         )
- *     ),
- *     @OA\Parameter(
- *         name="Accept",
- *         in="header",
- *         required=true,
- *         description="Accepted response type",
- *         @OA\Schema(
- *             type="string",
- *             example="application/json"
- *         )
- *     ),
+ *     summary="Fetch authenticated user details",
+ *     security={{"bearerAuth":{}}},
  *     @OA\Response(
  *         response=200,
- *         description="Successful response",
+ *         description="User details",
  *         @OA\JsonContent(
- *             type="object",
- *             @OA\Property(
- *                 property="data",
- *                 type="string",
- *                 example="Your response data"
- *             )
+ *             @OA\Property(property="id", type="integer"),
+ *             @OA\Property(property="name", type="string"),
+ *             @OA\Property(property="email", type="string"),
  *         )
- *     ),
- *     @OA\Response(
- *         response=400,
- *         description="Bad request"
  *     ),
  *     @OA\Response(
  *         response=401,
- *         description="Unauthorized"
- *     ),
- *     @OA\Response(
- *         response=500,
- *         description="Internal server error"
+ *         description="Unauthenticated"
  *     )
  * )
  */
+
 
     public function profile()
     {
